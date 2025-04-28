@@ -34,16 +34,30 @@
 							}
 						},
 						{
-							"name": "act_append_var",
-							"type": "AppendVariable",
+							"name": "act_if_condition",
+							"type": "IfCondition",
 							"dependsOn": [],
 							"userProperties": [],
 							"typeProperties": {
-								"variableName": "all_val",
-								"value": {
-									"value": "@if(equals(item(),'ram'),item(),'')",
+								"expression": {
+									"value": "@equals(toLower(item()),'ram')",
 									"type": "Expression"
-								}
+								},
+								"ifTrueActivities": [
+									{
+										"name": "act_append_var",
+										"type": "AppendVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "all_val",
+											"value": {
+												"value": "@item()",
+												"type": "Expression"
+											}
+										}
+									}
+								]
 							}
 						}
 					]
@@ -87,6 +101,9 @@
 				"type": "Array"
 			},
 			"all_list": {
+				"type": "Array"
+			},
+			"append_name": {
 				"type": "Array"
 			}
 		},
