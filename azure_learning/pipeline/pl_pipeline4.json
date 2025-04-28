@@ -1,0 +1,141 @@
+{
+	"name": "pl_pipeline4",
+	"properties": {
+		"activities": [
+			{
+				"name": "act_forEach",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.parmList",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "act_switch",
+							"description": "",
+							"type": "Switch",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"on": {
+									"value": "@item()",
+									"type": "Expression"
+								},
+								"cases": [
+									{
+										"value": "maharashtra",
+										"activities": [
+											{
+												"name": "act_set_maharashtra",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"policy": {
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "state",
+													"value": {
+														"value": "@concat('My State is ',item())",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"value": "rajsthan",
+										"activities": [
+											{
+												"name": "act_set_rajsthan",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"policy": {
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "state",
+													"value": {
+														"value": "@concat('My favorite State is ',item())",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									},
+									{
+										"value": "punjab",
+										"activities": [
+											{
+												"name": "act_set_punjab",
+												"type": "SetVariable",
+												"dependsOn": [],
+												"policy": {
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"variableName": "state",
+													"value": {
+														"value": "@concat('My favorite State is ',item())",
+														"type": "Expression"
+													}
+												}
+											}
+										]
+									}
+								],
+								"defaultActivities": [
+									{
+										"name": "act_set_default",
+										"type": "SetVariable",
+										"dependsOn": [],
+										"policy": {
+											"secureOutput": false,
+											"secureInput": false
+										},
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "state",
+											"value": "No State in case"
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"parmList": {
+				"type": "array",
+				"defaultValue": [
+					"maharashtra",
+					"punjab",
+					"gujarat",
+					"rajsthan",
+					"bihar",
+					"mp"
+				]
+			}
+		},
+		"variables": {
+			"state": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "session1"
+		},
+		"annotations": []
+	}
+}
