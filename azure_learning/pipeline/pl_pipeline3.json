@@ -30,8 +30,45 @@
 									"type": "Expression"
 								}
 							}
+						},
+						{
+							"name": "act_append_var",
+							"type": "AppendVariable",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "all_val",
+								"value": {
+									"value": "@item()",
+									"type": "Expression"
+								}
+							}
 						}
 					]
+				}
+			},
+			{
+				"name": "act_set_var_appendValues",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "act_for_each_val",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "all_list",
+					"value": {
+						"value": "@variables('all_val')",
+						"type": "Expression"
+					}
 				}
 			}
 		],
@@ -43,6 +80,12 @@
 		"variables": {
 			"each_val": {
 				"type": "String"
+			},
+			"all_val": {
+				"type": "Array"
+			},
+			"all_list": {
+				"type": "Array"
 			}
 		},
 		"folder": {
