@@ -17,6 +17,8 @@
 						{
 							"name": "act_set_var_each_val",
 							"type": "SetVariable",
+							"state": "Inactive",
+							"onInactiveMarkAs": "Succeeded",
 							"dependsOn": [],
 							"policy": {
 								"secureOutput": false,
@@ -39,7 +41,7 @@
 							"typeProperties": {
 								"variableName": "all_val",
 								"value": {
-									"value": "@item()",
+									"value": "@if(equals(item(),'ram'),item(),'')",
 									"type": "Expression"
 								}
 							}
