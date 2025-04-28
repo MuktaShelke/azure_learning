@@ -1,0 +1,123 @@
+{
+	"name": "pl_pipeline2",
+	"properties": {
+		"activities": [
+			{
+				"name": "act_var_person_details",
+				"description": "it set value for person details",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "alldetails",
+					"value": {
+						"value": "@pipeline().parameters.person_details",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_var_first_name",
+				"description": "set value for first name ",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "act_var_person_details",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "fname",
+					"value": {
+						"value": "@split(split(variables('alldetails'),' ')[0],'_')[0]",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_var_last_name",
+				"description": "set value for last name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "act_var_person_details",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "lname",
+					"value": {
+						"value": "@split(split(variables('alldetails'),' ')[0],'_')[1]",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_var_age",
+				"description": "set value of age",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "act_var_person_details",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "age",
+					"value": {
+						"value": "@int(split(variables('alldetails'),' ')[1])",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"person_details": {
+				"type": "string"
+			}
+		},
+		"variables": {
+			"alldetails": {
+				"type": "String"
+			},
+			"fname": {
+				"type": "String"
+			},
+			"lname": {
+				"type": "String"
+			},
+			"age": {
+				"type": "Integer"
+			}
+		},
+		"folder": {
+			"name": "session1"
+		},
+		"annotations": []
+	}
+}
