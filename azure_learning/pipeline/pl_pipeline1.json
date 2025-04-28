@@ -1,0 +1,61 @@
+{
+	"name": "pl_pipeline1",
+	"properties": {
+		"description": "learning pipeline ",
+		"activities": [
+			{
+				"name": "act_var_Fname",
+				"description": "this set variable activity store value of First name",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Fname",
+					"value": {
+						"value": "@split(pipeline().parameters.FullName,' ')[0]",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_var_LName",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Lname",
+					"value": {
+						"value": "@split(pipeline().parameters.FullName,' ')[1]",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"FullName": {
+				"type": "string",
+				"defaultValue": "Mukta Shelke"
+			}
+		},
+		"variables": {
+			"Fname": {
+				"type": "String"
+			},
+			"Lname": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "session1"
+		},
+		"annotations": []
+	}
+}
