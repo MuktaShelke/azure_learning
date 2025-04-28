@@ -1,0 +1,53 @@
+{
+	"name": "pl_pipeline3",
+	"properties": {
+		"activities": [
+			{
+				"name": "act_for_each_val",
+				"type": "ForEach",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.val_list",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "act_set_var_each_val",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "each_val",
+								"value": {
+									"value": "@item()",
+									"type": "Expression"
+								}
+							}
+						}
+					]
+				}
+			}
+		],
+		"parameters": {
+			"val_list": {
+				"type": "array"
+			}
+		},
+		"variables": {
+			"each_val": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "session1"
+		},
+		"annotations": []
+	}
+}
