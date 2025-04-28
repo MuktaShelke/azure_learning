@@ -43,6 +43,18 @@
 									"value": "@equals(toLower(item()),'ram')",
 									"type": "Expression"
 								},
+								"ifFalseActivities": [
+									{
+										"name": "act_append_false_val",
+										"type": "AppendVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "all_val",
+											"value": "No Name"
+										}
+									}
+								],
 								"ifTrueActivities": [
 									{
 										"name": "act_append_var",
