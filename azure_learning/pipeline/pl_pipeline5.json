@@ -1,0 +1,93 @@
+{
+	"name": "pl_pipeline5",
+	"properties": {
+		"activities": [
+			{
+				"name": "act_Until",
+				"type": "Until",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@greaterOrEquals(variables('number'),3)",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "act_set_number",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "number",
+								"value": {
+									"value": "@add(variables('incrementalValue'),1)\n",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "act_set_incremental_number",
+							"type": "SetVariable",
+							"dependsOn": [
+								{
+									"activity": "act_set_number",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "incrementalValue",
+								"value": {
+									"value": "@variables('number')",
+									"type": "Expression"
+								}
+							}
+						},
+						{
+							"name": "Wait1",
+							"type": "Wait",
+							"dependsOn": [
+								{
+									"activity": "act_set_incremental_number",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
+							"userProperties": [],
+							"typeProperties": {
+								"waitTimeInSeconds": 10
+							}
+						}
+					],
+					"timeout": "0.12:00:00"
+				}
+			}
+		],
+		"variables": {
+			"number": {
+				"type": "Integer",
+				"defaultValue": 0
+			},
+			"incrementalValue": {
+				"type": "Integer",
+				"defaultValue": 0
+			}
+		},
+		"folder": {
+			"name": "session1"
+		},
+		"annotations": []
+	}
+}
