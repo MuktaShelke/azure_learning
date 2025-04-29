@@ -125,6 +125,9 @@
 				"type": "Array"
 			}
 		},
+		"folder": {
+			"name": "session1"
+		},
 		"annotations": []
 	}
 }
