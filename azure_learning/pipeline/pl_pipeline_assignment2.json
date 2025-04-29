@@ -1,0 +1,158 @@
+{
+	"name": "pl_pipeline_assignment2",
+	"properties": {
+		"activities": [
+			{
+				"name": "act_filter_mList",
+				"type": "Filter",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.nameList",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@startswith(toUpper(item()),'M') ",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_filter_sList",
+				"type": "Filter",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.nameList",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@startswith(toUpper(item()),'S')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_filter_otherList",
+				"type": "Filter",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@pipeline().parameters.nameList",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@and(not(startswith(toUpper(item()),'M')),not(startswith(toUpper(item()),'S')))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_set_Mlist",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "act_filter_mList",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "MList",
+					"value": {
+						"value": "@activity('act_filter_mList').output.Value",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_set_SList",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "act_filter_sList",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "SList",
+					"value": {
+						"value": "@activity('act_filter_sList').output.Value",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_set_otherList",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "act_filter_otherList",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "OtherList",
+					"value": {
+						"value": "@activity('act_filter_otherList').output.Value",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"nameList": {
+				"type": "array",
+				"defaultValue": [
+					"Ram",
+					"Sham",
+					"Manoj",
+					"Kiran",
+					"Radha",
+					"Mohan",
+					"Manoj",
+					"Ratan",
+					"Sita"
+				]
+			}
+		},
+		"variables": {
+			"MList": {
+				"type": "Array"
+			},
+			"SList": {
+				"type": "Array"
+			},
+			"OtherList": {
+				"type": "Array"
+			}
+		},
+		"folder": {
+			"name": "session2"
+		},
+		"annotations": []
+	}
+}
