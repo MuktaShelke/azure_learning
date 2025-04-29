@@ -3,35 +3,9 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "act_set_data",
-				"type": "SetVariable",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
-				"policy": {
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"variableName": "personInfo",
-					"value": {
-						"value": "@pipeline().parameters.persondata",
-						"type": "Expression"
-					}
-				}
-			},
-			{
 				"name": "act_id",
 				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "act_set_data",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"secureOutput": false,
 					"secureInput": false
@@ -48,14 +22,7 @@
 			{
 				"name": "act_name",
 				"type": "SetVariable",
-				"dependsOn": [
-					{
-						"activity": "act_set_data",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"secureOutput": false,
 					"secureInput": false
