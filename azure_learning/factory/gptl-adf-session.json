@@ -1,0 +1,9 @@
+{
+	"name": "gptl-adf-session",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "db02b490-b672-4c6b-a084-a702ef7e18c7",
+		"tenantId": "fc8c872c-1d7d-48d7-af86-7f92fff1cc73"
+	}
+}
