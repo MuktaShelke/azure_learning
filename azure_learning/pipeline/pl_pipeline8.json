@@ -30,8 +30,134 @@
 						"type": "DelimitedTextReadSettings"
 					}
 				}
+			},
+			{
+				"name": "act_for_each",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "act_metadata",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('act_metadata').output.childItems",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "act_segregate_types",
+							"type": "IfCondition",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"expression": {
+									"value": "@equals(item().type,'Folder') ",
+									"type": "Expression"
+								},
+								"ifFalseActivities": [
+									{
+										"name": "act_append_fileName",
+										"type": "AppendVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "FileList",
+											"value": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
+										}
+									}
+								],
+								"ifTrueActivities": [
+									{
+										"name": "act_append_folderName",
+										"type": "AppendVariable",
+										"dependsOn": [],
+										"userProperties": [],
+										"typeProperties": {
+											"variableName": "FolderList",
+											"value": {
+												"value": "@item().name",
+												"type": "Expression"
+											}
+										}
+									}
+								]
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "act_folder_list",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "act_for_each",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "get_folder_nams",
+					"value": {
+						"value": "@variables('FolderList')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_file_list",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "act_for_each",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "get_file_names",
+					"value": {
+						"value": "@variables('FileList')",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"variables": {
+			"FolderList": {
+				"type": "Array"
+			},
+			"FileList": {
+				"type": "Array"
+			},
+			"get_folder_nams": {
+				"type": "Array"
+			},
+			"get_file_names": {
+				"type": "Array"
+			}
+		},
 		"folder": {
 			"name": "session2"
 		},
