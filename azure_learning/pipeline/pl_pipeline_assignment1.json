@@ -1,0 +1,95 @@
+{
+	"name": "pl_pipeline_assignment1",
+	"properties": {
+		"activities": [
+			{
+				"name": "act_set_data",
+				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "personInfo",
+					"value": {
+						"value": "@pipeline().parameters.persondata",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_id",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "act_set_data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "id",
+					"value": {
+						"value": "@split(pipeline().parameters.persondata,',')[0]",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_name",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "act_set_data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "name",
+					"value": {
+						"value": "@split(concat(split(pipeline().parameters.persondata,',')[1],',',split(pipeline().parameters.persondata,',')[2]),',')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"persondata": {
+				"type": "string",
+				"defaultValue": "1,Ram,Patil"
+			}
+		},
+		"variables": {
+			"personInfo": {
+				"type": "String"
+			},
+			"id": {
+				"type": "String"
+			},
+			"name": {
+				"type": "Array"
+			}
+		},
+		"folder": {
+			"name": "session2"
+		},
+		"annotations": []
+	}
+}
