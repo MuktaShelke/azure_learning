@@ -3,11 +3,15 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "act_validate_file",
+				"name": "act_validate_file_check",
 				"type": "Validation",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
+					"dataset": {
+						"referenceName": "adf_input_dataset",
+						"type": "DatasetReference"
+					},
 					"timeout": "0.12:00:00",
 					"sleep": 10
 				}
