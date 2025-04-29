@@ -1,0 +1,21 @@
+{
+	"name": "pl_pipeline7",
+	"properties": {
+		"activities": [
+			{
+				"name": "act_validate_file",
+				"type": "Validation",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"timeout": "0.12:00:00",
+					"sleep": 10
+				}
+			}
+		],
+		"folder": {
+			"name": "session2"
+		},
+		"annotations": []
+	}
+}
