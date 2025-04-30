@@ -145,6 +145,11 @@
 				}
 			}
 		],
+		"parameters": {
+			"test": {
+				"type": "string"
+			}
+		},
 		"variables": {
 			"FolderList": {
 				"type": "Array"
