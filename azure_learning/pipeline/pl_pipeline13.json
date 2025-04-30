@@ -1,5 +1,5 @@
 {
-	"name": "pl_pipeline12",
+	"name": "pl_pipeline13",
 	"properties": {
 		"activities": [
 			{
@@ -17,22 +17,8 @@
 				"typeProperties": {
 					"source": {
 						"type": "DelimitedTextSource",
-						"additionalColumns": [
-							{
-								"name": "File_path",
-								"value": "$$FILEPATH"
-							},
-							{
-								"name": "dateTime",
-								"value": {
-									"value": "@utcNow()",
-									"type": "Expression"
-								}
-							}
-						],
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
-							"maxConcurrentConnections": 3,
 							"recursive": true,
 							"wildcardFolderPath": "input_data",
 							"wildcardFileName": "sal*",
@@ -45,30 +31,15 @@
 					"sink": {
 						"type": "DelimitedTextSink",
 						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings",
-							"copyBehavior": "MergeFiles"
+							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
 							"type": "DelimitedTextWriteSettings",
 							"quoteAllText": true,
-							"fileExtension": ".csv"
+							"fileExtension": ".txt"
 						}
 					},
 					"enableStaging": false,
-					"logSettings": {
-						"enableCopyActivityLog": true,
-						"copyActivityLogSettings": {
-							"logLevel": "Info",
-							"enableReliableLogging": false
-						},
-						"logLocationSettings": {
-							"linkedServiceName": {
-								"referenceName": "LS_ADF_ADLS",
-								"type": "LinkedServiceReference"
-							},
-							"path": "datacontainer/copy_log"
-						}
-					},
 					"translator": {
 						"type": "TabularTranslator",
 						"typeConversion": true,
