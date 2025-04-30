@@ -1,0 +1,15 @@
+{
+	"name": "DS_Rest_API",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_rest_API",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": "all_month.geojson"
+		},
+		"schema": []
+	}
+}
