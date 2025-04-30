@@ -1,0 +1,60 @@
+{
+	"name": "ds_copy_sink_wildcard",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADF_ADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "copy_output_data",
+				"fileSystem": "datacontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "cid",
+				"type": "String"
+			},
+			{
+				"name": "fname",
+				"type": "String"
+			},
+			{
+				"name": "lname",
+				"type": "String"
+			},
+			{
+				"name": "city",
+				"type": "String"
+			},
+			{
+				"name": "pan_card",
+				"type": "String"
+			},
+			{
+				"name": "dob",
+				"type": "String"
+			},
+			{
+				"name": "enrollment_date",
+				"type": "String"
+			},
+			{
+				"name": "File_path",
+				"type": "String"
+			},
+			{
+				"name": "dateTime",
+				"type": "String"
+			}
+		]
+	}
+}

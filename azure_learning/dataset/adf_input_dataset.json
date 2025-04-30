@@ -1,10 +1,6 @@
 {
 	"name": "adf_input_dataset",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "LS_ADF_ADLS",
-			"type": "LinkedServiceReference"
-		},
 		"parameters": {
 			"file_name": {
 				"type": "String"

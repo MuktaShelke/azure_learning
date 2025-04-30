@@ -1,13 +1,17 @@
 {
-	"name": "adf_input_dataset_delete",
+	"name": "ds_copy_sink_data",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADF_ADLS",
+			"type": "LinkedServiceReference"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"folderPath": "data",
-				"fileSystem": "adfinputdata"
+				"folderPath": "copy_output_data",
+				"fileSystem": "datacontainer"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
