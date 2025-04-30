@@ -99,6 +99,8 @@
 			{
 				"name": "act_folder_list",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "act_for_each",

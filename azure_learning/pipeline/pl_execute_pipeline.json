@@ -37,7 +37,7 @@
 				"typeProperties": {
 					"variableName": "file_list",
 					"value": {
-						"value": "@activity('Execute Pipeline1').output.pipelineReturnValue.FileList",
+						"value": "@activity('Execute Pipeline1').output.pipelineReturnValue",
 						"type": "Expression"
 					}
 				}
