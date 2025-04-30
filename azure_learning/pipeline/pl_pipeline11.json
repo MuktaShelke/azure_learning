@@ -1,0 +1,92 @@
+{
+	"name": "pl_pipeline11",
+	"properties": {
+		"activities": [
+			{
+				"name": "act_web_api",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "GET",
+					"url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+				}
+			},
+			{
+				"name": "act_set_var",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "act_web_api",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "data",
+					"value": {
+						"value": "@activity('act_web_api').output.features",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "act_If_condition",
+				"type": "IfCondition",
+				"dependsOn": [
+					{
+						"activity": "act_set_var",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@not(equals(activity('act_web_api').output.metadata.count,length(variables('data'))))\n\n",
+						"type": "Expression"
+					},
+					"ifTrueActivities": [
+						{
+							"name": "Act_Fail",
+							"description": "",
+							"type": "Fail",
+							"dependsOn": [],
+							"userProperties": [],
+							"typeProperties": {
+								"message": "Count is matching ",
+								"errorCode": "4001"
+							}
+						}
+					]
+				}
+			}
+		],
+		"variables": {
+			"data": {
+				"type": "Array"
+			},
+			"count": {
+				"type": "Integer"
+			}
+		},
+		"folder": {
+			"name": "session3"
+		},
+		"annotations": []
+	}
+}
