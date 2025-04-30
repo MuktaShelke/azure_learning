@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileSystem": "adfinputdata"
+				"folderPath": "source_location",
+				"fileSystem": "datacontainer"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

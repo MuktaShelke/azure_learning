@@ -113,11 +113,17 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "get_folder_nams",
-					"value": {
-						"value": "@variables('FolderList')",
-						"type": "Expression"
-					}
+					"variableName": "pipelineReturnValue",
+					"value": [
+						{
+							"key": "return_folder_list",
+							"value": {
+								"type": "Expression",
+								"content": "@variables('FolderList')"
+							}
+						}
+					],
+					"setSystemVariable": true
 				}
 			},
 			{
@@ -137,11 +143,17 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"variableName": "get_file_names",
-					"value": {
-						"value": "@variables('FileList')",
-						"type": "Expression"
-					}
+					"variableName": "pipelineReturnValue",
+					"value": [
+						{
+							"key": "return_file_list",
+							"value": {
+								"type": "Expression",
+								"content": "@variables('FileList')"
+							}
+						}
+					],
+					"setSystemVariable": true
 				}
 			}
 		],
@@ -156,6 +168,9 @@
 				"type": "Array"
 			},
 			"get_file_names": {
+				"type": "Array"
+			},
+			"file_list": {
 				"type": "Array"
 			}
 		},
