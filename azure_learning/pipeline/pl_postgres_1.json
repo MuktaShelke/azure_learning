@@ -21,7 +21,8 @@
 					"dataset": {
 						"referenceName": "ds_postgres_sql",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],

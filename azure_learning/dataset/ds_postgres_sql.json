@@ -3,10 +3,17 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_PostgreSql",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"postgres_db_name": "gptl_postgres_db"
+			}
 		},
 		"annotations": [],
 		"type": "PostgreSqlV2Table",
-		"schema": []
+		"schema": [],
+		"typeProperties": {
+			"schema": "gptl_schema",
+			"table": "department"
+		}
 	}
 }
